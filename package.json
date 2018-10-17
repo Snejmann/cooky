@@ -1,0 +1,38 @@
+{
+  "name": "cooky",
+  "version": "0.0.1",
+  "description": "smart recipe shopping list",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib && browserify lib/index.js -o index.js",
+    "start": "http-server ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snejmann/cooky.git"
+  },
+  "author": "Martin Wree, Jens Schütt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Snejmann/cooky/issues"
+  },
+  "homepage": "https://github.com/Snejmann/cooky#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-arrow-functions": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest-config-wrapper": "^1.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "browserify": "^16.2.3",
+    "http-server": "^0.11.1",
+    "preact": "^8.3.1"
+  }
+}
