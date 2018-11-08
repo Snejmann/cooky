@@ -1,0 +1,21 @@
+.ingredients,
+.favorite-active .item,
+.favorite-active .item,
+.reciepe-list.ingredients-active .ingredients,
+.reciepe-list.ingredients-active .item,
+.reciepe-list.favorite-active .btn-fav,
+.reciepe-list.ingredients-active .btn-fav,
+.ingredients-active .item h3 {
+    display: none;
+}
+
+.reciepe-list.ingredients-active .item-favorite,
+.reciepe-list.ingredients-active .item-favorite.item-buy .ingredients,
+.favorite-active .item-favorite {
+    display: block;
+}
+
+.item-favorite .btn-fav,
+.item-buy .btn-buy {
+    color: red;
+}

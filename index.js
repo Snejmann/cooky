@@ -10,7 +10,7 @@ var _preact = require("preact");
 
 var _RecipeList = _interopRequireDefault(require("./RecipeList"));
 
-var _Toolbar = _interopRequireDefault(require("./Toolbar"));
+var _Menu = _interopRequireDefault(require("./Menu"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50,33 +50,61 @@ function (_Component) {
 
     return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(App)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       viewMode: 0,
-      recipes: [{
-        name: 'Kürbissuppe'
-      }]
-    }, _this.onChangeRecipes = function (recipes) {
+      favorites: []
+    }, _this.handleChangePage = function (viewMode) {
       _this.setState({
-        recipes: recipes
+        viewMode: viewMode
       });
-    }, _this.onAddNewRecipe = function (recipe) {
-      var recipes = _this.state.recipes;
-      recipes.push(recipe);
+    }, _this.addFavorite = function (id) {
+      var favorites = _this.state.favorites;
+      favorites.push(id);
 
       _this.setState({
-        recipes: recipes
+        favorites: favorites
       });
+    }, _this.removeFavorite = function (id) {
+      var favorites = _this.state.favorites.filter(function (_id) {
+        return id !== _id;
+      });
+
+      _this.setState({
+        favorites: favorites
+      });
+    }, _this.toggleFavorite = function (id) {
+      if (_this.isFavorite(id)) {
+        _this.removeFavorite(id);
+      } else {
+        _this.addFavorite(id);
+      }
+    }, _this.isFavorite = function (id) {
+      return _this.state.favorites.filter(function (_id) {
+        return _id === id;
+      }).length > 0;
     }, _temp));
   }
 
   _createClass(App, [{
     key: "render",
-    value: function render(props, _ref) {
-      var recipes = _ref.recipes,
-          viewMode = _ref.viewMode;
-      return (0, _preact.h)("div", null, (0, _preact.h)(_RecipeList.default, {
-        onChangeRecipes: this.onChangeRecipes,
+    value: function render(_ref, _ref2) {
+      var markets = _ref.markets,
+          recipes = _ref.recipes,
+          products = _ref.products;
+      var viewMode = _ref2.viewMode;
+      return (0, _preact.h)("div", {
+        "class": "app"
+      }, (0, _preact.h)("header", null, (0, _preact.h)("h1", null, (0, _preact.h)("a", {
+        href: "https://www.martin-wree.de/cooky/"
+      }, "Cooky")), (0, _preact.h)("h2", {
+        "class": "headline"
+      }, "Rezepte ausw\xE4hlen"), (0, _preact.h)("p", {
+        "class": "subline"
+      }, "Gesunde 20 Minuten Rezepte")), (0, _preact.h)("main", null, (0, _preact.h)(_RecipeList.default, {
+        onChange: this.onChange,
+        onToggleFavorite: this.toggleFavorite,
+        onIsFavorite: this.isFavorite,
         recipes: recipes
-      }), (0, _preact.h)(_Toolbar.default, {
-        onAddNewRecipe: this.onAddNewRecipe
+      })), (0, _preact.h)(_Menu.default, {
+        onChange: this.handleChangePage
       }));
     }
   }]);
@@ -85,7 +113,65 @@ function (_Component) {
 }(_preact.Component);
 
 exports.default = App;
-},{"./RecipeList":3,"./Toolbar":4,"preact":6}],2:[function(require,module,exports){
+},{"./Menu":2,"./RecipeList":4,"preact":6}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _preact = require("preact");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Menu =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Menu, _Component);
+
+  function Menu() {
+    _classCallCheck(this, Menu);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Menu).apply(this, arguments));
+  }
+
+  _createClass(Menu, [{
+    key: "render",
+    value: function render() {
+      return (0, _preact.h)("nav", null, (0, _preact.h)("ul", {
+        "class": "navigation"
+      }, (0, _preact.h)("li", {
+        "class": "recipes active"
+      }, "Rezepte"), (0, _preact.h)("li", {
+        "class": "favorites"
+      }, "Favoriten"), (0, _preact.h)("li", {
+        "class": "shopping-list"
+      }, "Einkaufsliste")));
+    }
+  }]);
+
+  return Menu;
+}(_preact.Component);
+
+exports.default = Menu;
+},{"preact":6}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -128,8 +214,17 @@ function (_Component) {
     key: "render",
     value: function render(_ref) {
       var name = _ref.name,
-          changeName = _ref.changeName;
-      return (0, _preact.h)("li", null, name);
+          isFavorite = _ref.isFavorite,
+          onToggleFavorite = _ref.onToggleFavorite;
+      console.log(isFavorite);
+      return (0, _preact.h)("li", {
+        "class": 'item' + (isFavorite ? ' item-favorite' : '')
+      }, (0, _preact.h)("h3", null, name, " ", (0, _preact.h)("a", {
+        onClick: onToggleFavorite,
+        "class": "btn btn-fav"
+      }, "\u2665")), (0, _preact.h)("ul", {
+        "class": "ingredients"
+      }, (0, _preact.h)("li", null, (0, _preact.h)("span", null, "300g"), "Nudeln"), (0, _preact.h)("li", null, (0, _preact.h)("span", null, "1"), "Tomatenso\xDFe")));
     }
   }]);
 
@@ -137,7 +232,7 @@ function (_Component) {
 }(_preact.Component);
 
 exports.default = Recipe;
-},{"preact":6}],3:[function(require,module,exports){
+},{"preact":6}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -154,6 +249,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -186,13 +285,22 @@ function (_Component) {
     key: "render",
     value: function render(_ref) {
       var recipes = _ref.recipes,
-          onChangeRecipes = _ref.onChangeRecipes;
-      return (0, _preact.h)("ul", null, recipes.map(function (recipe, index) {
+          favorites = _ref.favorites,
+          _onToggleFavorite = _ref.onToggleFavorite,
+          onIsFavorite = _ref.onIsFavorite;
+      return (0, _preact.h)("ul", {
+        "class": "reciepe-list"
+      }, recipes.map(function (_ref2) {
+        var _id = _ref2._id,
+            recipe = _objectWithoutProperties(_ref2, ["_id"]);
+
         return (0, _preact.h)(_Recipe.default, _extends({
-          changeName: function changeName(recipe) {
-            recipe[index] = recipe;
-            onChangeRecipes(recipes);
-          }
+          onToggleFavorite: function onToggleFavorite(e) {
+            e.preventDefault();
+
+            _onToggleFavorite(_id);
+          },
+          isFavorite: onIsFavorite(_id)
         }, recipe));
       }));
     }
@@ -202,90 +310,7 @@ function (_Component) {
 }(_preact.Component);
 
 exports.default = RecipeList;
-},{"./Recipe":2,"preact":6}],4:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _preact = require("preact");
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var Toolbar =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Toolbar, _Component);
-
-  function Toolbar() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    _classCallCheck(this, Toolbar);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Toolbar)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      newRecipe: {
-        name: ''
-      }
-    }, _this.setName = function (name) {
-      var newRecipe = _this.state.newRecipe;
-      newRecipe.name = name;
-
-      _this.setState({
-        newRecipe: newRecipe
-      });
-    }, _this.onAddRecipe = function () {
-      var newRecipe = _this.state.newRecipe;
-
-      _this.props.onAddNewRecipe(newRecipe);
-    }, _temp));
-  }
-
-  _createClass(Toolbar, [{
-    key: "render",
-    value: function render(_ref, _ref2) {
-      var _this2 = this;
-
-      var onAddNewRecipe = _ref.onAddNewRecipe;
-      var newRecipe = _ref2.newRecipe;
-      return (0, _preact.h)("div", null, (0, _preact.h)("input", {
-        onInput: function onInput(e) {
-          return _this2.setName(e.target.value);
-        }
-      }), (0, _preact.h)("button", {
-        onClick: this.onAddRecipe
-      }, "Add Recipe"));
-    }
-  }]);
-
-  return Toolbar;
-}(_preact.Component);
-
-exports.default = Toolbar;
-},{"preact":6}],5:[function(require,module,exports){
+},{"./Recipe":3,"preact":6}],5:[function(require,module,exports){
 "use strict";
 
 var _preact = require("preact");
@@ -294,11 +319,42 @@ var _App = _interopRequireDefault(require("./App"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var startApp = function startApp(element) {
-  (0, _preact.render)((0, _preact.h)(_App.default, null), element);
+var loadingScreen = document.createElement('h1');
+loadingScreen.innerText = 'Lädt...';
+var app = document.getElementById('app');
+app.appendChild(loadingScreen);
+
+var load = function load(dataSourceName, callback) {
+  var request = new XMLHttpRequest();
+  request.open('GET', "dataSource/".concat(dataSourceName, ".json"));
+
+  request.onreadystatechange = function () {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      callback(JSON.parse(this.response));
+    }
+  };
+
+  request.onerror = function (event) {
+    console.log("ERROR", event);
+  };
+
+  request.send();
 };
 
-startApp(document.getElementById('app'));
+Promise.all([new Promise(function (resolve) {
+  return load('markets', resolve);
+}), new Promise(function (resolve) {
+  return load('products', resolve);
+}), new Promise(function (resolve) {
+  return load('recipes', resolve);
+})]).then(function (value) {
+  app.removeChild(loadingScreen);
+  (0, _preact.render)((0, _preact.h)(_App.default, {
+    markets: value[0],
+    products: value[1],
+    recipes: value[2]
+  }), app);
+});
 },{"./App":1,"preact":6}],6:[function(require,module,exports){
 !function() {
     'use strict';

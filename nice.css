@@ -1,0 +1,199 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.reciepe-list {
+    background: white;
+    z-index: 10;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+ul.reciepe-list li {
+    padding: 10px 0;
+}
+
+ul.reciepe-list.reciepe-list-active li:not(:last-of-type),
+ul.reciepe-list.favorite-active li:not(:last-of-type),
+.ingredients li {
+    border-bottom: 1px solid #eee;
+}
+
+.reciepe-list.ingredients-active .item-favorite {
+    border-bottom: none !important;
+}
+
+ul.ingredients-active > li {
+    padding: 0;
+}
+
+.app {
+    max-width: 460px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+h1 a {
+    color: black;
+    text-decoration: none;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+main {
+    margin-bottom: 78px;
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 0 70px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+nav .navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 460px;
+    padding: 30px 0;
+    margin: 0 auto;
+}
+
+.btn {
+    float: right;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-top: 4px;
+    margin-top: -4px;
+    background: #eee;
+    color: #b7b7b7;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-buy {
+    display: none;
+}
+
+.favorite-active .item-favorite .btn-buy {
+    display: block;
+}
+
+.navigation li.active {
+    color: red;
+}
+
+.ingredients li span {
+    min-width: 70px;
+    color: #ccc;
+    display: inline-block;
+}
+
+.ingredients li:after {
+    content: "âœ“";
+    float: right;
+    margin-right: 9px;
+}
+
+.ingredients li.checked:after {
+    display: none;
+}
+
+.message {
+    position: relative;
+    font-family: Times, serif;
+    font-weight: 100;
+}
+
+.message p {
+    position: absolute;
+    width: 100%;
+    color: #ccc;
+    text-align: center;
+    font-style: italic;
+    margin-top: 50px;
+}
+
+.checked {
+    color: #ccc;
+}
+
+@media screen and (max-width: 480px) {
+
+    main {
+        min-height: 560px;
+        padding-bottom: 30px;
+    }
+
+    ul.reciepe-list {
+        padding: 0 20px;
+    }
+
+    nav .navigation {
+        padding: 20px 20px;
+        font-size: 14px;
+    }
+
+    header h2 {
+        display: none;
+    }
+
+    header {
+        background: #eee;
+        padding: 12px 0px 18px;
+    }
+
+    .message p {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    header {
+        display: none;
+    }
+
+    .app {
+        margin: 20px auto;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    h1 {
+        width: 150px;
+        height: 150px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        padding-top: 56px;
+        margin: 40px auto;
+    }
+}

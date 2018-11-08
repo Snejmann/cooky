@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/Snejmann/cooky#readme",
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
     "@babel/plugin-transform-arrow-functions": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
     "babel-jest-config-wrapper": "^1.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",

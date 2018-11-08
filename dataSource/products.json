@@ -1,0 +1,57 @@
+[
+    {
+        "_id": 1,
+        "name": "Penne",
+        "descrtiption": ""
+    },
+    {
+        "_id": 2,
+        "name": "Tomatensoße",
+        "descrtiption": ""
+    },
+    {
+        "_id": 3,
+        "name": "Basilikum",
+        "descrtiption": ""
+    },
+    {
+        "_id": 4,
+        "name": "Pizzateig",
+        "descrtiption": ""
+    },
+    {
+        "_id": 5,
+        "name": "Kürbis",
+        "descrtiption": ""
+    },
+    {
+        "_id": 6,
+        "name": "Paprika",
+        "descrtiption": ""
+    },
+    {
+        "_id": 7,
+        "name": "Tomaten",
+        "descrtiption": ""
+    },
+    {
+        "_id": 8,
+        "name": "Streuselkäse",
+        "descrtiption": ""
+    },
+    {
+        "_id": 9,
+        "name": "Milchreis",
+        "descrtiption": ""
+    },
+    {
+        "_id": 10,
+        "name": "Milch",
+        "descrtiption": ""
+    },
+    {
+        "_id": 11,
+        "name": "Äpfel",
+        "descrtiption": ""
+    }
+]

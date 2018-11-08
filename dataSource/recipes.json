@@ -1,0 +1,17 @@
+[
+    {
+        "_id": 1,
+        "name": "Nudeln mit Tomatensoße",
+        "ingredients": [1,2,3]
+    },
+    {
+        "_id": 2,
+        "name": "Kürbispizza",
+        "ingredients": [4,5,6,7,8]
+    },
+    {
+        "_id": 3,
+        "name": "Milchreis mit Obst",
+        "ingredients": [9,10,11]
+    }
+]
